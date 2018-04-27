@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+
+	int summand1; 
+	int summand2;
+
+	cout << "Bitte geben Sie zwei Zahlen ein und bestätigen Sie die eingabe jeweils mit ENTER." endl;
+
+	cin >> summand1 endl;
+	cin >> summand2 endl;
+
+	int ergebnis = summand1 * summand2;
+
+	cout << "Das Ergebnis ist" << ergebnis << "." << endl;
+
+	retourn 0;
+
+}
+	
+	
+	
+	
