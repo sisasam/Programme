@@ -92,12 +92,36 @@ public class Main {
 			System.out.println(deck[i].toString());
 		}
 		
-		System.out.print("Geben Sie die Anzahl der Spieler an(2-6 Spieler) : ");
-		do
+		System.out.print("Geben Sie die Anzahl der Spieler an(3-6 Spieler) : ");
+		
+		int pruef = 0;
+		boolean Wiederholen = true;
+			while (Wiederholen)
+			{
+			try 
+			{
+				ein = (new BufferedReader(new
+				InputStreamReader(System.in))).readLine();
+				pruef = Integer.parseDouble(ein);				// Heir gehts weiter
+				System.out.println(" ");
+				Wiederholen = false;
+			}
+			catch(Exception ex) 
+			{
+				System.out.println("Falsche Eingabe!");
+			}
+		
+/*		
+		boolean wiederholen = true;
+		while (wiederholen = true);
 		{	
 			eingabe(ein);
+			if (Double.parseDouble(ein) <= 6 && Double.parseDouble(ein) >= 3)
+			{
+				wiederholen = false;
+			}
 		}
-		while (Double.parseDouble(ein) < 3);//geht nicht
+		System.out.print("Fertsch");
 	}
-
+*/
 }
