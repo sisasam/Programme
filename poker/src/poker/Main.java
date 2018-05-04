@@ -2,7 +2,8 @@ package poker;
 import java.io.*;
 import java.util.Random;
 
-public class Main {
+public class Main 
+{
 	
 	static Random zufall = new Random();
 	/**
@@ -96,20 +97,22 @@ public class Main {
 		
 		int pruef = 0;
 		boolean Wiederholen = true;
-			while (Wiederholen)
-			{
+		while (Wiederholen || pruef > 6 || pruef < 2)	//Damit funktioniert die Überprüfung der Anzahl
+		{
 			try 
 			{
 				ein = (new BufferedReader(new
 				InputStreamReader(System.in))).readLine();
-				pruef = Integer.parseDouble(ein);				// Heir gehts weiter
+				pruef = Integer.parseInt(ein);
 				System.out.println(" ");
 				Wiederholen = false;
 			}
 			catch(Exception ex) 
 			{
-				System.out.println("Falsche Eingabe!");
+					System.out.println("Falsche Eingabe!");
 			}
+		}
+	}
 		
 /*		
 		boolean wiederholen = true;
