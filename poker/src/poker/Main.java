@@ -24,6 +24,7 @@ public class Main
 				deck[i] = new Card();
 				deck[i].setFarbe(f);
 				deck[i].setWert(w);
+				deck[i].setImDeck(true);
 				i++;
 			}
 		}
@@ -48,83 +49,114 @@ public class Main
 		}
 	}
 	
-	public static void eingabe(String ein)
+	/**
+	 * 
+	 * @param ein	User input einer double Zahl
+	 * @return		gibt die Eingabe unverändert zurück
+	 */
+	public static double eingabe(String ein)
 	{
-		double Gleitzahl = 0.0;
-		boolean Wiederholen = true;
-			while (Wiederholen)
-			{
+		double gleitzahl = 0.0;
+		boolean wiederholen = true;
+		while (wiederholen)
+		{
 			try 
 			{
 				ein = (new BufferedReader(new
 				InputStreamReader(System.in))).readLine();
-				Gleitzahl = Double.parseDouble(ein);
+				gleitzahl = Double.parseDouble(ein);
 				System.out.println(" ");
-				Wiederholen = false;
+				wiederholen = false;
 			}
 			catch(Exception ex) 
 			{
 				System.out.println("Falsche Eingabe!");
 			}
-			}
-	}
-	/*
-	public static void spiel(Card[] deck, int Anz)
-	{
-		try
-		{
-			
 		}
+		return gleitzahl;
 	}
-	*/
+	
+	/**
+	 * 
+	 * @param deck	Einzel Elemente aus dem deck[] werden zufällig ausgewählt
+	 * @return		als Card Element ausgegeben
+	 */
+	public static Card austeilen(Card[] deck)
+	{
+		int a = zufall.nextInt(deck.length);
+		Card ausgabe = deck[a];
+		if (ausgabe.getImDeck())
+		{
+			{
+				deck[a].setImDeck(false);
+			}
+		}
+		else
+		{
+			while (!ausgabe.getImDeck())
+			{
+				a = zufall.nextInt(deck.length);
+				ausgabe = deck[a];
+			}
+			deck[a].setImDeck(false);
+		}
+		return ausgabe;
+	}
+	
+	
 	public static void main(String[] args) 
 	{
-		Card deck[] = new Card [52];
+		Card[] deck = new Card [52];
 		String ein = "";
 		genCardDeck(deck);
-/*		for (int i = 0; i < deck.length; i++)	//Ausgabe des nicht sortierten Decks
+
+		mischen(deck);
+		
+		double anz =0.0;
+		do
 		{
-			System.out.println(deck[i].toString());
+			System.out.print("Geben Sie die Anzahl der Spieler an(3-6 Spieler) : ");
+			anz = eingabe(ein);
 		}
-		System.out.println(" ");
-*/		mischen(deck);
-		for (int i = 0; i < deck.length; i++)	//Ausgabe des sortierten Decks
+		while (anz < 3 || anz > 6);
+		
+		Player[] spieler = new Player [(int) anz];
+		for (int i = 0; i < spieler.length; i++)
 		{
-			System.out.println(deck[i].toString());
+			spieler[i] = new Player();
+			spieler[i].setErsteKarte(austeilen(deck));
+		}
+		for (int i = 0; i < spieler.length; i++)
+		{
+			spieler[i] = new Player();
+			spieler[i].setZweiteKarte(austeilen(deck));
+		}
+/**
+ *		Prüfen des gemischeten Decks 		
+ *
+ *		for (int i = 0; i < deck.length; i++)
+ *		{
+ *			System.out.println(deck[i].toString());
+ *		}
+ *		
+ */	
+		//Runde 1 -- 3 Ramdome Card Elemente werden offen auf den Tisch gelegt, nachdem jeder Spieler seine Einsätze getätigt hat.
+		for (int i = 0; i < spieler.length; i++)
+		{
+			System.out.println("Spieler" + (i+1) + " Einsatz?");
+			String eingabe=" ";
+			spieler[i].setEinsatz(eingabe(eingabe));
+		}
+		for (int i = 0; i < 3; i++) {
+			System.out.println(austeilen(deck).toString());
 		}
 		
-		System.out.print("Geben Sie die Anzahl der Spieler an(3-6 Spieler) : ");
+		//Runde 2 -- 	Startet mit erneuten Einsätzen, welche auf die aktuellen Einsätze aufaddiert werden 
+		// 				folgend wird der Turn gezogen
 		
-		int pruef = 0;
-		boolean Wiederholen = true;
-		while (Wiederholen || pruef > 6 || pruef < 2)	//Damit funktioniert die Überprüfung der Anzahl
-		{
-			try 
-			{
-				ein = (new BufferedReader(new
-				InputStreamReader(System.in))).readLine();
-				pruef = Integer.parseInt(ein);
-				System.out.println(" ");
-				Wiederholen = false;
-			}
-			catch(Exception ex) 
-			{
-					System.out.println("Falsche Eingabe!");
-			}
-		}
+
 	}
 		
-/*		
-		boolean wiederholen = true;
-		while (wiederholen = true);
-		{	
-			eingabe(ein);
-			if (Double.parseDouble(ein) <= 6 && Double.parseDouble(ein) >= 3)
-			{
-				wiederholen = false;
-			}
-		}
-		System.out.print("Fertsch");
-	}
-*/
 }
+
+
