@@ -103,6 +103,19 @@ public class Main
 		return ausgabe;
 	}
 	
+	public static Game spielErstellen(Card[] deck)
+	{
+		Game spiel = new Game();
+		Card[] tisch = new Card[5];
+		for (int i = 0; i < 5; i++) 
+		{
+			tisch[i] = austeilen(deck);
+		}
+		
+		spiel.setTisch(tisch);
+		
+		return spiel;
+	}
 	
 	public static void main(String[] args) 
 	{
@@ -125,12 +138,10 @@ public class Main
 		{
 			spieler[i] = new Player();
 			spieler[i].setErsteKarte(austeilen(deck));
-		}
-		for (int i = 0; i < spieler.length; i++)
-		{
-			spieler[i] = new Player();
 			spieler[i].setZweiteKarte(austeilen(deck));
 		}
+
+		
 /**
  *		Prüfen des gemischeten Decks 		
  *
@@ -140,6 +151,9 @@ public class Main
  *		}
  *		
  */	
+		Game spiel = new Game();
+		spiel = spielErstellen(deck);
+		
 		//Runde 1 -- 3 Ramdome Card Elemente werden offen auf den Tisch gelegt, nachdem jeder Spieler seine Einsätze getätigt hat.
 		for (int i = 0; i < spieler.length; i++)
 		{
@@ -148,13 +162,61 @@ public class Main
 			spieler[i].setEinsatz(eingabe(eingabe));
 		}
 		for (int i = 0; i < 3; i++) {
-			System.out.println(austeilen(deck).toString());
+			System.out.println(spiel.getTisch()[i]);
 		}
 		
 		//Runde 2 -- 	Startet mit erneuten Einsätzen, welche auf die aktuellen Einsätze aufaddiert werden 
 		// 				folgend wird der Turn gezogen
+		for (int i = 0; i < spieler.length; i++)
+		{
+			System.out.println("Spieler" + (i+1) + " Einsatz?");
+			String eingabe=" ";
+			int temp = 0;
+			temp = (int) (spieler[i].getEinsatz() + eingabe(eingabe));
+			spieler[i].setEinsatz(temp);
+		}
+		for (int i = 0; i < 4; i++) {
+			System.out.println(spiel.getTisch()[i]);
+		}
 		
-
+		//Runde3
+		for (int i = 0; i < spieler.length; i++)
+		{
+			System.out.println("Spieler" + (i+1) + " Einsatz?");
+			String eingabe=" ";
+			int temp = 0;
+			temp = (int) (spieler[i].getEinsatz() + eingabe(eingabe));
+			spieler[i].setEinsatz(temp);
+		}
+		for (int i = 0; i < 5; i++) {
+			System.out.println(spiel.getTisch()[i]);
+		}
+		
+		//letzte Runde
+		for (int i = 0; i < spieler.length; i++)
+		{
+			System.out.println("Spieler" + (i+1) + " Einsatz?");
+			String eingabe=" ";
+			int temp = 0;
+			temp = (int) (spieler[i].getEinsatz() + eingabe(eingabe));
+			spieler[i].setEinsatz(temp);
+		}
+		for (int i = 0; i < 5; i++) {
+			System.out.println(spiel.getTisch()[i]);
+		}
+		for (int i = 0; i < spieler.length; i++) 
+		{
+			System.out.println("Spieler" + (i+1) + " Karten: " + spieler[i].getErsteKarte() + " & " + spieler[i].getZweiteKarte());
+		}
+		
+		/**
+		 * 
+		 *
+		*	//Test der geamten Einsätze
+			System.out.println(spieler[0].getEinsatz());
+			System.out.println(spieler[1].getEinsatz());
+			System.out.println(spieler[2].getEinsatz());
+		*/
 	}
 		
 }
